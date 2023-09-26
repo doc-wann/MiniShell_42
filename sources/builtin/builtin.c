@@ -5,7 +5,7 @@ void	builtin_execv(t_data *data, char **cmd)
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		builtin_echo(cmd);
 	if (ft_strcmp(cmd[0], "cd") == 0)
-		builtin_cd(cmd);
+		builtin_cd(data);
 	if (ft_strcmp(cmd[0], "pwd") == 0)
 		builtin_pwd(cmd);
 	if (ft_strcmp(cmd[0], "export") == 0)

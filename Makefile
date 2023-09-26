@@ -5,6 +5,7 @@ LIBFT_PATH			=	./libft/
 INCS_PATH			=	./includes/
 SRCS_PATH 			=	./sources/
 SRCS_PATH_BUILTIN 	=	./sources/builtin/
+SRCS_PATH_SIGNAL 	=	./sources/signal/
 OBJS_PATH 			=	./objects/
 
 # FILES #
@@ -18,6 +19,7 @@ SRCS				=	${SRCS_PATH}/main.c			\
 						${SRCS_PATH}/init.c			\
 						${SRCS_PATH}/loop.c			\
 						${SRCS_PATH}/cmd.c			\
+						${SRCS_PATH}/cmd_list.c		\
 						${SRCS_PATH}/exit.c			\
 						${SRCS_PATH}/error.c
 
@@ -29,6 +31,9 @@ SRCS_BUILTIN		=	${SRCS_PATH_BUILTIN}/builtin.c					\
 						${SRCS_PATH_BUILTIN}/builtin/builtin_export.c	\
 						${SRCS_PATH_BUILTIN}/builtin/builtin_pwd.c		\
 						${SRCS_PATH_BUILTIN}/builtin/builtin_unset.c
+
+SRCS_SIGNAL			=	${SRCS_PATH_SIGNAL}/signal_int.c				\
+						${SRCS_PATH_SIGNAL}/signal_no_int.c
 
 # COMPILATION #
 CC			=	cc
@@ -51,7 +56,7 @@ EOC			=	"\033[0;0m"
 .c.o:
 				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-VPATH 		=	${SRCS_PATH} ${SRCS_PATH_BUILTIN}
+VPATH 		=	${SRCS_PATH} ${SRCS_PATH_BUILTIN} ${SRCS_PATH_SIGNAL}
 
 ${OBJS_PATH}%.o: %.c
 				@mkdir -p ${OBJS_PATH}
@@ -59,11 +64,12 @@ ${OBJS_PATH}%.o: %.c
 
 OBJS				=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS:.c=.o}}}
 OBJS_BUILTIN		=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_BUILTIN:.c=.o}}}
+OBJS_SIGNAL			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_SIGNAL:.c=.o}}}
 
-${NAME}:		${OBJS} ${OBJS_BUILTIN}
+${NAME}:		${OBJS} ${OBJS_BUILTIN} ${OBJS_SIGNAL}
 				@echo ${BLUE} "${NAME} is compiling..." ${EOC}
 				@make -s -C ${LIBFT_PATH}
-				@${CC} ${CFLAGS} ${OBJS} ${OBJS_BUILTIN} ${LIBFT} ${IFLAGS} -lreadline -o ${NAME}
+				@${CC} ${CFLAGS} ${OBJS} ${OBJS_BUILTIN} ${OBJS_SIGNAL} ${LIBFT} ${IFLAGS} -lreadline -o ${NAME}
 				@echo ${GREEN} "${NAME} is compilated!" ${EOC}
 
 all:			${NAME}

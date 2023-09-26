@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void	builtin_cd(char **cmd)
+void	builtin_cd(t_data *data)
 {
-	(void)cmd;
+	(void)data;
 }
