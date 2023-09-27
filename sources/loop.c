@@ -5,6 +5,11 @@ void	minishell_loop(t_data *data)
 	while (data->exit == 0)
 	{
 		data->read_line = readline("minishell> ");
+		if (data->read_line == NULL)
+		{
+			data->read_line = ft_strdup("");
+			sig_handler(56);
+		}
 		if (data->read_line[0] != 0)
 			add_history(data->read_line);
 		cmd_lst_create(data);

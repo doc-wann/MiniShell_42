@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:27:08 by nsutter           #+#    #+#             */
-/*   Updated: 2023/07/07 00:37:54 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/09/26 21:09:35 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_list
 }					t_list;
 
 int		ft_isalpha(int c);
+int		ft_lstlen(char **s);
+char    *ft_strncpy(char *src, unsigned int n);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);

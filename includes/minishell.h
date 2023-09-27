@@ -8,6 +8,7 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 
 
@@ -52,7 +53,12 @@ void	builtin_unset(char **cmd);
 void	builtin_execv(t_data *data, char **cmd);
 bool	builtin_check(char **cmd);
 
+/* enviroment aux's (located at cd builtin until somewhere better is found)*/
+char 	*get_env(char **envs, char *search);
+char	*path_parser(char *path);
+
 /* signal */
+void sig_handler(int signum);
 
 
 /* exit */

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 19:27:39 by nsutter           #+#    #+#              #
-#    Updated: 2023/06/23 14:52:06 by nsutter          ###   ########.fr        #
+#    Updated: 2023/09/26 21:12:16 by hdaniele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS 		= 	ft_isalpha.c		\
 				ft_strncmp.c		\
 				ft_memchr.c			\
 				ft_memcmp.c			\
+				ft_strncpy.c		\
 				ft_strnstr.c		\
 				ft_atoi.c			\
 				ft_calloc.c			\
@@ -60,6 +61,7 @@ SRCS 		= 	ft_isalpha.c		\
 				ft_lstnew.c			\
 				ft_lstadd_front.c	\
 				ft_lstsize.c		\
+				ft_lstlen.c			\
 				ft_lstlast.c		\
 				ft_lstadd_back.c	\
 				ft_lstdelone.c		\
