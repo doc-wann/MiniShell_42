@@ -3,19 +3,19 @@
 void	builtin_execv(t_data *data, char **cmd)
 {
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
-		builtin_echo(cmd);
+		builtin_echo(cmd, data);
 	if (ft_strncmp(cmd[0], "cd", 2) == 0)
-		builtin_cd(data);
+		builtin_cd(cmd, data);
 	if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		builtin_pwd(cmd);
 	if (ft_strncmp(cmd[0], "export", 6) == 0)
-		builtin_export(cmd);
+		builtin_export(cmd, data);
 	if (ft_strncmp(cmd[0], "unset", 5) == 0)
-		builtin_unset(cmd);
+		builtin_unset(cmd, data);
 	if (ft_strncmp(cmd[0], "env", 3) == 0)
 		builtin_env(data);
 	if (ft_strncmp(cmd[0], "exit", 4) == 0)
-		builtin_exit(cmd);
+		builtin_exit(cmd, data);
 }
 
 bool	builtin_check(char **cmd)

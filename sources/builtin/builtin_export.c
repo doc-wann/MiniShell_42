@@ -1,6 +1,8 @@
 #include "../includes/minishell.h"
 
-void	builtin_export(char **cmd)
+void	builtin_export(char **cmd, t_data *data)
 {
-	(void)cmd;
+	(void) cmd;
+	(void) data;
+	return ;
 }

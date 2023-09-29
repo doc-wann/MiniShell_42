@@ -1,7 +1,6 @@
 #include "../includes/minishell.h"
 
-void	builtin_exit(char **cmd)
+void	builtin_exit(char **cmd, t_data *data)
 {
-	(void)cmd;
 	exit(1);
 }

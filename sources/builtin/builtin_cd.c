@@ -2,42 +2,34 @@
 
 char *ft_backtrack(char *track);
 
-void	builtin_cd(t_data *data)
+void	builtin_cd(char **cmd, t_data *data)
 {
-	ft_printf("samba cd");
-
 	char *homepath;
-	char *compare;
+	char *buffer;
 
-	compare = ft_strdup("cd");
+	cmd =  ft_varfetch(cmd, data);
+
+	//THIS IS MERELY A "JUST TO MAKE IT WORK" SOLUTION
+	cmd[0] += 2;
+	cmd[0] = ft_strtrim(cmd[0], " ");
 
 	homepath = get_env(data->env, "$HOME");
 
-		if (ft_strncmp(data->cmd_lst->next->cmd, "$", 1) == 0)
-			data->cmd_lst->next->cmd = get_env(data->env, data->cmd_lst->next->cmd);
-		compare = "..";
-		if(!data->cmd_lst->next->cmd)
+	buffer = getcwd(NULL, 0);
+
+	if (!chdir(cmd[0]))
+	{
+		if (ft_strncmp(cmd[0], "..\0", 3) == 0)
+			chdir(ft_backtrack(buffer));
+		if (ft_strncmp(cmd[0], "../", 3) == 0)
 		{
-			if (chdir(ft_strjoin("/",homepath)) != 0)
-				printf("error when taking you home\n");
+			chdir(ft_backtrack(buffer));
+			cmd[0] += 3;
+			builtin_cd(cmd, data);
 		}
-		else if (data->cmd_lst->next->cmd)
-		{
-			if (ft_strncmp(data->cmd_lst->next->cmd, "..\0", 3) == 0)
-			{
-				chdir(ft_backtrack(getcwd(NULL, 100)));
-			}
-			else if (ft_strncmp(data->cmd_lst->next->cmd, "../", 3) == 0)
-			{
-				chdir(ft_backtrack(getcwd(NULL, 100)));
-				data->cmd_lst->next->cmd += 3;
-				builtin_cd(data);
-			}
-			else if(chdir(ft_strjoin(getcwd(NULL, 100), path_parser(data->cmd_lst->next->cmd))) != 0)
-				write(1, ft_strjoin(ft_strjoin("cd: no such file or directory: ", data->cmd_lst->next->cmd), "\n"), 31 + ft_strlen(data->cmd_lst->next->cmd) + 1);
-		}
-	else
-		return ;
+	}
+	free(buffer);
+	return ;
 }
 
 //maynotbeneeded :(
@@ -60,41 +52,19 @@ char *ft_backtrack(char *track)
 char *get_env(char **envs, char *search)
 {
 	int i;
-	char *env;
 
-	env = NULL;
+	if (ft_strncmp(search, "%", 1) == 0 && ft_strlen(search) > 1)
+		search += 1;
+
 	i = 0;
-	if (ft_strlen(search) < 2)
-		return (NULL);
-	if (ft_strncmp(search, "$ ", 1) == 0)
-		search++;
-	else
-		return (NULL);
-	if (search[0] >= 65 && search[0] <= 90)
-	{}
-	else
-		return (NULL);
-	search = ft_strjoin(search, "=");
-	while(i < ft_lstlen(envs))
+	while (i++ < ft_lstlen(envs) - 1)
 	{
-		if(ft_strncmp(envs[i], search, ft_strlen(search)) == 0)
+		if (ft_strncmp(search, envs[i], ft_strlen(search)) == 0)
 		{
-			env = envs[i];
-			break ;
-		}
-		else
-		{
-			i++;
+			return (envs[i] + ft_strlen(search) + 1);
 		}
 	}
-	if (env)
-	{
-		return(env + ft_strlen(search) + 1);
-	}
-	else
-	{
-		return(NULL);
-	}
+	return(ft_strjoin("%", search));
 }
 
 char	*path_parser(char *path)

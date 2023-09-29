@@ -43,19 +43,20 @@ void	cmd_execv(t_data *data);
 void	cmd_lst_create(t_data *data);
 
 /* builtin */
-void	builtin_cd(t_data *data);
-void	builtin_echo(char **cmd);
-void	builtin_env(t_data *data);
-void	builtin_exit(char **cmd);
-void	builtin_export(char **cmd);
-void	builtin_pwd(char **cmd);
-void	builtin_unset(char **cmd);
+void	builtin_cd(char **cmd, t_data *data); //working
+void	builtin_echo(char **cmd, t_data *data); //working
+void	builtin_env(t_data *data); //working
+void	builtin_exit(char **cmd, t_data *data); //"""working"""
+void	builtin_export(char **cmd, t_data *data);
+void	builtin_pwd(char **cmd); //working
+void	builtin_unset(char **cmd, t_data *data); //working
 void	builtin_execv(t_data *data, char **cmd);
 bool	builtin_check(char **cmd);
 
 /* enviroment aux's (located at cd builtin until somewhere better is found)*/
 char 	*get_env(char **envs, char *search);
 char	*path_parser(char *path);
+char 	**ft_varfetch(char **args, t_data *data);
 
 /* signal */
 void sig_handler(int signum);
