@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   error_exec_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:53 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/02 01:32:42 by nsutter          ###   ########.fr       */
+/*   Created: 2023/09/30 21:36:56 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/02 02:17:52 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(t_data *data)
+int	error_exec_cmd_not_found(char *cmd)
 {
-	char	**env;
-
-	env = data->env;
-	if (!env)
-		return (1);
-	while (*env)
-	{
-		ft_printf("%s\n", *env);
-		env++;
-	}
-	return (0);
+	printf("minishell: ");
+	printf("%s: ", cmd);
+	printf("command not found\n");
+	return (1);
 }

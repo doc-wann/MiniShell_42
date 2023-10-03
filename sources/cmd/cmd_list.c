@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_list.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/30 21:36:29 by nsutter           #+#    #+#             */
+/*   Updated: 2023/09/30 22:43:27 by nsutter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-/********************************************************************************************/
-/* SPLIT																					*/
-/********************************************************************************************/
+/****************************************************************************/
+/* SPLIT													    			*/
+/****************************************************************************/
 
 static int	ft_nb_split(char const *s, char c)
 {
@@ -82,15 +94,9 @@ char	**ft_split_test(t_data *data, char c)
 	return (ft_dst_split(dst, data, c));
 }
 
-
-
-
-
-
-
-/********************************************************************************************/
-/* cmd_lst_create																			*/
-/********************************************************************************************/
+/****************************************************************************/
+/* cmd_lst_create															*/
+/****************************************************************************/
 
 void	lstadd_back_cmd(t_cmd_lst **cmd_lst, t_cmd_lst *cmd)
 {
@@ -114,7 +120,8 @@ t_cmd_lst	*lstnew_cmd(t_data *data, char *cmd)
 	new = (t_cmd_lst *)malloc(sizeof(*new));
 	if (!new)
 		return (NULL);
-	new->cmd = cmd;
+	new->process = ft_split(cmd, ' ');
+	new->cmd = new->process[0];
 	if (data->nb_execv > 0)
 		new->parser = "|";
 	else
@@ -124,7 +131,7 @@ t_cmd_lst	*lstnew_cmd(t_data *data, char *cmd)
 	return (new);
 }
 
-void	cmd_lst_create(t_data *data)
+int	cmd_lst_create(t_data *data)
 {
 	t_cmd_lst	**cmd_lst;
 	t_cmd_lst	*new;
@@ -158,8 +165,12 @@ void	cmd_lst_create(t_data *data)
 	data->cmd_lst = *cmd_lst;
 /*	while (data->cmd_lst)
 	{
-		printf("%s\n", data->cmd_lst->parser);
-		printf("%s\n", data->cmd_lst->cmd);
+		printf("parser     : %s\n", data->cmd_lst->parser);
+		printf("cmd        : %s\n", data->cmd_lst->cmd);
+		printf("process[0] : %s\n", data->cmd_lst->process[0]);
+		printf("process[1] : %s\n", data->cmd_lst->process[1]);
+		printf("process[2] : %s\n", data->cmd_lst->process[2]);
 		data->cmd_lst = data->cmd_lst->next;
 	}*/
+	return (0);
 }

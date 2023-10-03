@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:53 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/02 01:32:42 by nsutter          ###   ########.fr       */
+/*   Created: 2022/05/30 02:30:50 by nsutter           #+#    #+#             */
+/*   Updated: 2022/06/22 21:20:24 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../libft.h"
 
-int	builtin_env(t_data *data)
+char	*ft_strncpy(char *src, unsigned int n)
 {
-	char	**env;
+	unsigned int	index;
+	char			*dest;
 
-	env = data->env;
-	if (!env)
-		return (1);
-	while (*env)
+	dest = ft_calloc(n, sizeof(char));
+	index = 0;
+	while (index < n && src[index] != '\0')
 	{
-		ft_printf("%s\n", *env);
-		env++;
+		dest[index] = src[index];
+		index++;
 	}
-	return (0);
+	while (index < n)
+	{
+		dest[index] = '\0';
+		index++;
+	}
+	return (dest);
 }

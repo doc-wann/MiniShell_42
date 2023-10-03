@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   error_builtin_cd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:53 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/02 01:32:42 by nsutter          ###   ########.fr       */
+/*   Created: 2023/09/30 21:36:56 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/02 02:15:25 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(t_data *data)
+int	error_builtin_cd_too_many_arg(void)
 {
-	char	**env;
+	printf("minishell: cd: too many arguments\n");
+	return (1);
+}
 
-	env = data->env;
-	if (!env)
-		return (1);
-	while (*env)
-	{
-		ft_printf("%s\n", *env);
-		env++;
-	}
-	return (0);
+int	error_builtin_cd_no_dir(char *cmd)
+{
+	printf("minishell: cd: ");
+	printf("%s: ", cmd);
+	printf("No such file or directory\n");
+	return (1);
 }

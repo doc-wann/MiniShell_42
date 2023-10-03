@@ -1,22 +1,16 @@
-#include "../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/30 21:36:18 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/01 19:22:50 by nsutter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	builtin_execv(t_data *data, char **cmd)
-{
-	if (ft_strcmp(cmd[0], "echo") == 0)
-		builtin_echo(cmd);
-	if (ft_strcmp(cmd[0], "cd") == 0)
-		builtin_cd(data);
-	if (ft_strcmp(cmd[0], "pwd") == 0)
-		builtin_pwd(cmd);
-	if (ft_strcmp(cmd[0], "export") == 0)
-		builtin_export(cmd);
-	if (ft_strcmp(cmd[0], "unset") == 0)
-		builtin_unset(cmd);
-	if (ft_strcmp(cmd[0], "env") == 0)
-		builtin_env(data);
-	if (ft_strcmp(cmd[0], "exit") == 0)
-		builtin_exit(cmd);
-}
+#include "../includes/minishell.h"
 
 bool	builtin_check(char **cmd)
 {

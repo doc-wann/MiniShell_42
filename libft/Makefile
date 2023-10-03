@@ -69,6 +69,7 @@ SRCS 		= 	ft_isalpha.c		\
 				ft_putstr.c			\
 				ft_putchar.c		\
 				ft_strcmp.c			\
+				ft_strncpy.c		\
 				ft_get_next_line.c	\
 				ft_printf_chr.c		\
 				ft_printf_hex.c		\

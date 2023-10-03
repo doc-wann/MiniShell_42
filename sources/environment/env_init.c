@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:53 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/02 01:32:42 by nsutter          ###   ########.fr       */
+/*   Created: 2023/10/01 16:01:23 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/01 20:18:59 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(t_data *data)
+bool	env_init(t_data *data, char **envp)
 {
-	char	**env;
+	int	i;
 
-	env = data->env;
-	if (!env)
-		return (1);
-	while (*env)
+	i = 0;
+	while (envp && envp[i])
+		i++;
+	data->env = ft_calloc(i + 1, sizeof * data->env);
+	if (data->env == NULL)
+		return (false);
+	i = 0;
+	while (envp[i])
 	{
-		ft_printf("%s\n", *env);
-		env++;
+		data->env[i] = ft_strdup(envp[i]);
+		if (data->env[i] == NULL)
+			return (false);
+		i++;
 	}
-	return (0);
+	return (true);
 }

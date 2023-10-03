@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/30 21:35:58 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/03 22:49:00 by nsutter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-void	builtin_exit(char **cmd)
+int	builtin_exit(char **cmd)
 {
 	(void)cmd;
+	// free
 	exit(1);
+	return (0);
 }
