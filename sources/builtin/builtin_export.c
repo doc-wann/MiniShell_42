@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:36:02 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/03 22:39:21 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:44:49 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,43 @@ char	**add_to_array(char **list, char *input)
 	return(ret);
 }
 
+int	ft_indexof(char *str, char *set)
+{
+	int index;
+	int subindex;
+	int val;
+
+	index = 0;
+	subindex = 0;
+	val = -1;
+
+	while (set[index])
+	{
+		while(str[subindex])
+		{
+			if (set[index] == str[subindex])
+			{
+				if (val > subindex || val == -1)
+				{
+					val = subindex;
+				}
+			}
+			subindex++;
+		}
+		index++;
+	}
+	return (val);
+}
+
 int	builtin_export(char **cmd, t_data *data)
 {
-	cmd[0] += ft_strlen("export ");
+	cmd += 1;
 
-	add_to_env(data, ft_split(cmd[0], '=')[0], ft_split(cmd[0], '=')[1]);
+	if (cmd[0] == NULL || ft_indexof(cmd[0], "=") == -1)
+		ft_printf("Error - Bad Assignment\n");
+	else if (ft_indexof(cmd[0], "=") == (int)ft_strlen(cmd[0]) - 1)
+		ft_printf("Error - Bad Assignment\n");
+	else
+		add_to_env(data, ft_split(cmd[0], '=')[0], ft_split(cmd[0], '=')[1]);
 	return (0);
 }

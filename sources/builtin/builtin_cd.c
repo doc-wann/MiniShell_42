@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:35:39 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/03 22:56:55 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:56:29 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_env(char **envs, char *search)
 {
 	int	i;
 
-	if (ft_strncmp(search, "%", 1) == 0 && ft_strlen(search) > 1)
+	if (ft_strncmp(search, "$", 1) == 0 && ft_strlen(search) > 1)
 		search += 1;
 	i = 0;
 	while (i++ < ft_lstlen(envs) - 1)
@@ -52,7 +52,7 @@ char	*get_env(char **envs, char *search)
 			return (envs[i] + ft_strlen(search) + 1);
 		}
 	}
-	return (ft_strjoin("%", search));
+	return (ft_strjoin("$", search));
 }
 
 char	*path_parser(char *path)
@@ -73,11 +73,16 @@ int	builtin_cd(char **cmd, t_data *data)
 
 	cmd = ft_varfetch(cmd, data);
 	//THIS IS MERELY A "JUST TO MAKE IT WORK" SOLUTION
-	cmd[0] += 2;
-	cmd[0] = ft_strtrim(cmd[0], " ");
+	if(ft_strcmp(cmd[0], "cd") == 0)
+		cmd += 1;
+
 	homepath = get_env(data->env, "$HOME");
 	buffer = getcwd(NULL, 0);
-	if (!chdir(cmd[0]))
+	if (cmd[0] == NULL)
+	{
+		chdir(homepath);
+	}
+	else if (!chdir(cmd[0]))
 	{
 		if (ft_strncmp(cmd[0], "..\0", 3) == 0)
 			chdir(ft_backtrack(buffer));
