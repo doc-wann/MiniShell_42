@@ -2,8 +2,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
+
 	t_data	data;
 
 	(void)argc;
