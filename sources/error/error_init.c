@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   error_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:58 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/14 19:29:33 by nsutter          ###   ########.fr       */
+/*   Created: 2023/09/30 21:36:56 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/15 15:09:49 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_exit(char **cmd)
+void	error_init(t_data *data, int error)
 {
-	(void)cmd;
-	exit(1);
-	return (0);
+	(void)data;
+	if (error == ERROR_ISATTY)
+		printf("Minishell> Error : Descriptor does not relate to a terminal\n");
+	if (error == ERROR_NB_ARGUMENT)
+		printf("Minishell> Error : No need for arguments\n");
 }

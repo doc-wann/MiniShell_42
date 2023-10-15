@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   error_builtin_pwd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:58 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/14 19:29:33 by nsutter          ###   ########.fr       */
+/*   Created: 2023/10/15 15:00:59 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/15 15:03:53 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_exit(char **cmd)
+int	error_builtin_pwd(void)
 {
-	(void)cmd;
-	exit(1);
-	return (0);
+	perror(NULL);
+	return (1);
 }

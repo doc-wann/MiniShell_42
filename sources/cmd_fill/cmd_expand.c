@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   cmd_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:58 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/14 19:29:33 by nsutter          ###   ########.fr       */
+/*   Created: 2023/10/15 23:08:17 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/15 23:31:27 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_exit(char **cmd)
+void	cmd_expand(t_data *data, t_token_lst *token_lst)
 {
-	(void)cmd;
-	exit(1);
-	return (0);
+	(void)data;
+	(void)token_lst;
 }

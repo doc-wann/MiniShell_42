@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   error_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:58 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/14 19:29:33 by nsutter          ###   ########.fr       */
+/*   Created: 2023/10/13 21:44:51 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/13 21:44:52 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_exit(char **cmd)
+void	error_pipe(t_data *data)
 {
-	(void)cmd;
-	exit(1);
-	return (0);
+	perror(NULL);
+	exit_minishell(data);
 }

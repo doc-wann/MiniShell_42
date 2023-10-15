@@ -6,11 +6,26 @@
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 20:01:11 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/01 20:36:04 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:49:42 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	free_mem(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i])
+	{
+		free(ptr[i]);
+		ptr[i] = NULL;
+		i++;
+	}
+	free(ptr);
+	ptr = NULL;
+}
 
 char	*exec_path(char *cmd, char **envp)
 {

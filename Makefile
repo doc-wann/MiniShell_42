@@ -4,11 +4,11 @@ NAME				=	minishell
 LIBFT_PATH			=	./libft/
 INCS_PATH			=	./includes/
 SRCS_PATH 			=	./sources/
-SRCS_PATH_ENV	 	=	./sources/environment/
 SRCS_PATH_BUILTIN 	=	./sources/builtin/
 SRCS_PATH_SIGNAL 	=	./sources/signal/
-SRCS_PATH_CMD	 	=	./sources/cmd/
-SRCS_PATH_LEXER	 	=	./sources/lexer/
+SRCS_PATH_CMD_LST	=	./sources/cmd_lst/
+SRCS_PATH_CMD_FILL	=	./sources/cmd_fill/
+SRCS_PATH_CHECK	 	=	./sources/check/
 SRCS_PATH_EXEC	 	=	./sources/execution/
 SRCS_PATH_ERROR	 	=	./sources/error/
 SRCS_PATH_REDIR 	=	./sources/redirection/
@@ -25,8 +25,6 @@ SRCS				=	${SRCS_PATH}/main.c			\
 						${SRCS_PATH}/init.c			\
 						${SRCS_PATH}/exit.c
 
-SRCS_ENV			=	${SRCS_PATH_ENV}/env_init.c
-
 SRCS_BUILTIN		=	${SRCS_PATH_BUILTIN}/builtin.c					\
 						${SRCS_PATH_BUILTIN}/builtin/builtin_cd.c		\
 						${SRCS_PATH_BUILTIN}/builtin/builtin_echo.c		\
@@ -40,17 +38,31 @@ SRCS_SIGNAL			=	${SRCS_PATH_SIGNAL}/signal.c					\
 						${SRCS_PATH_SIGNAL}/signal_int.c				\
 						${SRCS_PATH_SIGNAL}/signal_no_int.c
 
-SRCS_CMD			=	${SRCS_PATH_CMD}/cmd_list.c
+SRCS_CMD_FILL		=	${SRCS_PATH_CMD_FILL}/cmd_quotes.c				\
+						${SRCS_PATH_CMD_FILL}/cmd_expand.c
 
-SRCS_LEXER			=	${SRCS_PATH_LEXER}/lexer.c
+SRCS_CMD_LST		=	${SRCS_PATH_CMD_LST}/cmd_lst_create.c			\
+						${SRCS_PATH_CMD_LST}/cmd_lst_pipe.c				\
+						${SRCS_PATH_CMD_LST}/cmd_lst_update.c
+
+SRCS_CHECK			=	${SRCS_PATH_CHECK}/check_arg.c					\
+						${SRCS_PATH_CHECK}/check_arg_cmd.c				\
+						${SRCS_PATH_CHECK}/check_arg_operator.c			\
+						${SRCS_PATH_CHECK}/check_syntax.c				\
+						${SRCS_PATH_CHECK}/check_syntax_error.c			\
+						${SRCS_PATH_CHECK}/check_to_token_lst.c			\
+						${SRCS_PATH_TOKEN}/check_token_lst.c
 
 SRCS_EXEC			=	${SRCS_PATH_EXEC}/exec_cmd.c					\
-						${SRCS_PATH_EXEC}/exec_builtin.c				\
-						${SRCS_PATH_EXEC}/exec_path.c
+						${SRCS_PATH_EXEC}/exec_path.c					\
+						${SRCS_PATH_EXEC}/exec_fd.c
 
-SRCS_ERROR			=	${SRCS_PATH_ERROR}/error.c						\
+SRCS_ERROR			=	${SRCS_PATH_ERROR}/error_init.c					\
 						${SRCS_PATH_ERROR}/error_builtin_cd.c			\
-						${SRCS_PATH_ERROR}/error_exec_cmd.c
+						${SRCS_PATH_ERROR}/error_builtin_pwd.c			\
+						${SRCS_PATH_ERROR}/error_exec_cmd.c				\
+						${SRCS_PATH_ERROR}/error_pipe.c					\
+						${SRCS_PATH_ERROR}/error_token.c
 
 SRCS_REDIR			=	${SRCS_PATH_REDIR}/redir.c
 
@@ -75,26 +87,29 @@ EOC			=	"\033[0;0m"
 .c.o:
 				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-VPATH 		=	${SRCS_PATH} ${SRCS_PATH_ENV} ${SRCS_PATH_BUILTIN} ${SRCS_PATH_SIGNAL} ${SRCS_PATH_CMD} ${SRCS_PATH_LEXER} ${SRCS_PATH_EXEC} ${SRCS_PATH_ERROR} ${SRCS_PATH_REDIR}
+VPATH 		=	${SRCS_PATH} ${SRCS_PATH_BUILTIN} ${SRCS_PATH_SIGNAL} ${SRCS_PATH_CMD_FILL} ${SRCS_PATH_CMD_LST} \
+				${SRCS_PATH_CHECK} ${SRCS_PATH_EXEC} ${SRCS_PATH_ERROR} ${SRCS_PATH_REDIR}
 
 ${OBJS_PATH}%.o: %.c
 				@mkdir -p ${OBJS_PATH}
 				@${CC} ${CFLAGS} ${IFLAGS} -c $< -o $@
 
 OBJS				=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS:.c=.o}}}
-OBJS_ENV			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_ENV:.c=.o}}}
 OBJS_BUILTIN		=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_BUILTIN:.c=.o}}}
 OBJS_SIGNAL			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_SIGNAL:.c=.o}}}
-OBJS_CMD			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_CMD:.c=.o}}}
-OBJS_LEXER			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_LEXER:.c=.o}}}
+OBJS_CMD_FILL		=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_CMD_FILL:.c=.o}}}
+OBJS_CMD_LST		=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_CMD_LST:.c=.o}}}
+OBJS_CHECK			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_CHECK:.c=.o}}}
 OBJS_EXEC			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_EXEC:.c=.o}}}
 OBJS_ERROR			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_ERROR:.c=.o}}}
 OBJS_REDIR			=	${addprefix ${OBJS_PATH}, ${notdir ${SRCS_REDIR:.c=.o}}}
 
-${NAME}:		${OBJS} ${OBJS_ENV} ${OBJS_BUILTIN} ${OBJS_SIGNAL} ${OBJS_CMD} ${OBJS_LEXER} ${OBJS_EXEC} ${OBJS_ERROR} ${OBJS_REDIR}
+${NAME}:		${OBJS} ${OBJS_BUILTIN} ${OBJS_SIGNAL} ${OBJS_CMD_FILL} ${OBJS_CMD_LST} \
+				${OBJS_CHECK} ${OBJS_EXEC} ${OBJS_ERROR} ${OBJS_REDIR}
 				@echo ${BLUE} "${NAME} is compiling..." ${EOC}
 				@make -s -C ${LIBFT_PATH}
-				@${CC} ${CFLAGS} ${OBJS} ${OBJS_ENV} ${OBJS_BUILTIN} ${OBJS_SIGNAL} ${OBJS_CMD} ${OBJS_LEXER} ${OBJS_EXEC} ${OBJS_ERROR} ${OBJS_REDIR} ${LIBFT} ${IFLAGS} -lreadline -o ${NAME}
+				@${CC} ${CFLAGS} ${OBJS} ${OBJS_BUILTIN} ${OBJS_SIGNAL} ${OBJS_CMD_FILL} ${OBJS_CMD_LST} ${OBJS_CHECK} \
+				${OBJS_EXEC} ${OBJS_ERROR} ${OBJS_REDIR} ${LIBFT} ${IFLAGS} -lreadline -o ${NAME}
 				@echo ${GREEN} "${NAME} is compilated!" ${EOC}
 
 all:			${NAME}
