@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/30 21:36:08 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/13 18:04:28 by hdaniele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	put_endl(char *str, int fd)
@@ -8,7 +20,7 @@ void	put_endl(char *str, int fd)
 	write(fd, "\n", 1);
 }
 
-void	builtin_pwd(char **cmd)
+int	builtin_pwd(char **cmd)
 {
 	char	*buf;
 	char	*cwd;
@@ -22,10 +34,10 @@ void	builtin_pwd(char **cmd)
 		put_endl(cwd, 1);
 		free(buf);
 		free(cwd);
-		return ;
+		return (0);
 	}
 	if (!cwd)
 		ft_printf("no pwd\n");
-	return ;
+	return (1);
 }
 

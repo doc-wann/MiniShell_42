@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:35:53 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/02 01:32:42 by nsutter          ###   ########.fr       */
+/*   Created: 2023/09/30 21:36:48 by nsutter           #+#    #+#             */
+/*   Updated: 2023/10/03 23:39:30 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(t_data *data)
+void	signal_handler(void)
 {
-	char	**env;
-
-	env = data->env;
-	if (!env)
-		return (1);
-	while (*env)
+	signal(SIGINT, &signal_handler_sigint);
+	signal(SIGQUIT, &signal_handler_sigquit);
+/*	if (signum == 56)
 	{
-		ft_printf("%s\n", *env);
-		env++;
-	}
-	return (0);
+		printf("There should be a leak here (signal_int) which will be solved with quit()");
+		exit(1);
+	}*/
 }
