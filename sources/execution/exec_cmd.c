@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:13:59 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/03 22:46:11 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:38:53 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	exec_cmd_alone(t_data *data)
 void	exec_cmd(t_data *data)
 {
 //	if (data->nb_execv > 1)
+	if (data->read_line != NULL)
 		exec_cmd_multi(data);
 //	else
 //		exec_cmd_alone(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:37:15 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/03 23:38:40 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:47:39 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	loop_minishell(t_data *data)
 	while (data->exit == 0)
 	{
 		data->read_line = readline("minishell> ");
-		if (data->read_line == NULL)
+		if (data->read_line == NULL || data->read_line[0] == '\0')
 			printf("error ??\n");
 		if (data->read_line[0] != 0)
 			add_history(data->read_line);
-		if (check_minishell(data) != 0)
+		if (data->read_line[0] == '\0' || check_minishell(data) != 0)
 			error_msg(data, data->error);
 		else
 			exec_cmd(data);
