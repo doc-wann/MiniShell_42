@@ -6,11 +6,13 @@
 /*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:35:49 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/13 18:02:46 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:21:10 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int datarelay(t_data *data);
 
 static int	count_args(char **args)
 {
@@ -44,6 +46,9 @@ int	builtin_echo(char **args, t_data *data)
 	i = 0;
 	n_flag = 0;
 	args += 1;
+
+	if (args[0] == NULL)
+		return (0);
 	if (ft_strcmp(args[0], "-n") == 0)
 	{
 		args++;
@@ -59,5 +64,7 @@ int	builtin_echo(char **args, t_data *data)
 	}
 	if (n_flag == 0)
 		ft_printf("\n");
+
+	datarelay(data);
 	return (0);
 }
