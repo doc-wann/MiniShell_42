@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 21:47:07 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 22:08:42 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/20 18:57:19 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	check_arg_read_is_meta(char read)
 {
 	if (read == '|')
 		return (0);
-	if (read == '<')
-		return (0);
-	if (read == '>')
-		return (0);
+	//if (read == '<')
+	//	return (0);
+	//if (read == '>')
+	//	return (0);
 	return (1);
 }
 

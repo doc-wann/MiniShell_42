@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:38:08 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 23:32:00 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/25 17:38:52 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct s_token_lst
 	int						token;
 	char					*value;
 	struct s_token_lst		*next;
+	
+	struct s_token_lst		*last;
+	
 }	t_token_lst;
 
 typedef struct s_cmd_lst
@@ -159,6 +162,9 @@ void		signal_handler_sigint(int signum);
 void		signal_handler_sigquit(int signum);
 
 /* redirection */
+int			write_file(int fd, char *filename);
+int			write_file_append(int fd, char *filename);
+int			control_stdout(t_data *data, int flag);
 
 /* error */
 void		error_init(t_data *data, int error);

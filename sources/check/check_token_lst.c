@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_token_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 21:45:35 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 23:24:42 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/20 18:07:26 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	token_lst_add_back(t_token_lst **token_lst, t_token_lst *token)
 	back = *token_lst;
 	while (back->next)
 		back = back->next;
+	token->last = back;
 	back->next = token;
 }
 
@@ -36,6 +37,7 @@ t_token_lst	*token_lst_new(char *value, int token)
 		return (NULL);
 	new->token = token;
 	new->value = value;
+	new->last = NULL;
 	new->next = NULL;
 	return (new);
 }

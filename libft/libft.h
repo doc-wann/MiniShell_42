@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:27:08 by nsutter           #+#    #+#             */
-/*   Updated: 2023/07/07 00:37:54 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:25:41 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_putstr(char *str);
 void	ft_putchar(char c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strncpy(char *src, unsigned int n);
+int		ft_arrlen(char **s);
 
 /********************/
 /*	get_next_line	*/

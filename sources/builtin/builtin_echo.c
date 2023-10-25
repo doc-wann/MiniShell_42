@@ -3,63 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:35:49 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 15:33:10 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/25 17:52:49 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**ft_varfetch(char **cmd, t_data *data)
-{
-	int		i;
-	int		j;
-	char	**phrases;
+int datarelay(t_data *data);
 
-	i = 0;
-	while (i < builtin_len(cmd))
-	{
-		phrases = ft_split(cmd[i], ' ');
-		j = 0;
-		while (j < builtin_len(phrases))
-		{
-			if (ft_strncmp(phrases[j], "%", 1) == 0)
-				phrases[j] = get_env(data->env, phrases[j]);
-			phrases[j] = ft_strjoin(phrases[j], " ");
-			j++;
-		}
-		j = 1;
-		while (j < builtin_len(phrases))
-		{
-			phrases[0] = ft_strjoin(phrases[0], phrases[j]);
-			j++;
-		}
-		cmd[i++] = phrases[0];
-	}
-	return (cmd);
+static int	count_args(char **args)
+{
+	int		count;
+
+	count = 0;
+	while (args[count])
+		count++;
+	return (count);
 }
 
-int	builtin_echo(char **cmd, t_data *data)
+char	**ft_varfetch(char **args, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < count_args(args))
+	{
+		if (ft_strncmp(args[i], "$", 1) == 0)
+			args[i] = get_env(data->env, args[i]);
+		i++;
+	}
+	return (args);
+}
+
+int	builtin_echo(char **args, t_data *data)
 {
 	int		i;
 	int		n_flag;
 
 	i = 0;
 	n_flag = 0;
-	cmd[0] += 4;
-	cmd[0] = ft_strtrim(cmd[0], " ");
-	cmd = ft_varfetch(cmd, data);
-	if (builtin_len(cmd) == 1)
+	args += 1;
+
+	if (args[0] == NULL)
+		return (0);
+	if (ft_strcmp(args[0], "-n") == 0)
 	{
-		while (cmd[i])
-		{
-			printf("%s\n", cmd[i]);
-			if (cmd[i + 1] && cmd[i][0] != '\0')
-				write(1, " ", 1);
-			i++;
-		}
+		args++;
+		n_flag = 1;
 	}
+	args = ft_varfetch(args, data);
+	while(args[i])
+	{
+		ft_printf("%s", args[i], i);
+		if (i < ft_arrlen(args) - 1)
+			ft_printf(" ");
+		i++;
+	}
+	if (n_flag == 0)
+		ft_printf("\n");
 	return (0);
 }
