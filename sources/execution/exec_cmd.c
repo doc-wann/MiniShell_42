@@ -6,7 +6,7 @@
 /*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 21:44:06 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/25 18:00:25 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:40:37 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,31 @@ void	exec_cmd_multi(t_data *data);
 
 void	exec_cmd_alonex(char **cmd, t_data *data)
 {
+	int i;
+
+	i = 0;
+	while (i < ft_arrlen(cmd))
+	{
+		if (ft_strcmp(cmd[i], "<") == 0
+			|| ft_strcmp(cmd[i], "<<") == 0
+			|| ft_strcmp(cmd[i], ">") == 0
+			|| ft_strcmp(cmd[i], ">>") == 0)
+			break;
+		i++;
+	}
+	
 	if (cmd == NULL || cmd[0] == NULL)
+	{
 		return ;
+	}
 	else if (builtin_check(cmd))
+	{
 		builtin_exec(data, cmd);
+	}
 	else
+	{
 		exec_cmd_multi(data);
+	}
 }
 
 char **ft_arrcut(char **list, int start, int end)

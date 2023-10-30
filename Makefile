@@ -70,7 +70,7 @@ SRCS_REDIR			=	${SRCS_PATH_REDIR}/redir.c
 CC			=	cc
 RM			=	rm -rf
 AR			=	ar -rcs
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra -g
 IFLAGS		=	-I ./includes
 
 # COLORS #

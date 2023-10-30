@@ -1,6 +1,19 @@
 #include "../includes/minishell.h"
 #include <fcntl.h>
 
+int ft_cleanfile(int fd)
+{
+	char	buf[1];
+	char	buf2[1];
+
+	buf2[0] = '0';
+
+	while(read(fd, buf, 1))
+		write(fd, buf2, 1);
+
+	return (0);
+}
+
 int	write_file(int fd, char *filename)
 {
 	int controller;
@@ -8,7 +21,7 @@ int	write_file(int fd, char *filename)
 	int fdout;
 
 	controller = 1;
-	fdout = open(filename, O_CREAT | O_RDWR);
+	fdout = open(filename, O_CREAT | O_RDWR | O_TRUNC);
 	while (controller != 0)
 	{
 		ft_bzero(buf, 1);

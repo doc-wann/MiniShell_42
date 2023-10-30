@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 19:27:39 by nsutter           #+#    #+#              #
-#    Updated: 2023/06/23 14:52:06 by nsutter          ###   ########.fr        #
+#    Updated: 2023/10/25 19:48:51 by hdaniele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS_PATH 	= ./objs/
 # COMPILATION #
 CC 			= gcc
 RM 			= rm -rf
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -g
 AR			= ar -rcs
 
 # SOURCE FILES #

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:37:01 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 14:41:00 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/10/25 18:08:04 by hdaniele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,11 @@ void	exit_minishell(t_data *data)
 		close(i);
 		i++;
 	}
+	while (data->token_lst->next)
+	{
+		data->token_lst = data->token_lst->next;
+		free(data->token_lst->last);
+	}
+	free(data);
 	exit(0);
 }
