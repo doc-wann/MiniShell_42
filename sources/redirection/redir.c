@@ -80,6 +80,31 @@ int control_stdout(t_data *data, int flag)
 	return (0);
 }
 
+int control_stdin(t_data *data, int flag)
+{
+	(void) data;
+ 	static int stdout_backup;
+	static int pipe_fd[2];
+
+	if (flag == 0)
+	{
+		stdout_backup = dup(STDIN_FILENO);
+		pipe(pipe_fd);
+		dup2(pipe_fd[1], STDIN_FILENO);
+	}
+	//Place command call here
+	if (flag == 1)
+	{
+		close(pipe_fd[1]);
+		dup2(stdout_backup, STDIN_FILENO);
+	}
+	if (flag == 2)
+	{
+		return (pipe_fd[0]);
+	}
+	return (0);
+}
+
 int datarelay(t_data *data)
 {
 	ft_printf("\nTHIS IS A DATA RELAY\n");

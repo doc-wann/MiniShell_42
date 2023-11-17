@@ -162,6 +162,7 @@ void		signal_handler_sigint(int signum);
 void		signal_handler_sigquit(int signum);
 
 /* redirection */
+int			control_stdin(t_data *data, int flag);
 int			write_file(int fd, char *filename);
 int			write_file_append(int fd, char *filename);
 int			control_stdout(t_data *data, int flag);

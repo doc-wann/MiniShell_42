@@ -91,13 +91,13 @@ void	exec_redirection(t_data *data, t_cmd_lst *cmd_lst)
 		control_stdout(data, 1);
 		write_file(control_stdout(data, 2), cmd_lst->cmd[i + 1]);
 	}
-	// else if (cmd_lst->cmd[i][0] == '<')
-	// {
-	// 	control_stdout(data, 0);
-	// 	exec_cmd_alonex(ft_arrcut(cmd_lst->cmd, i + 1, (ft_arrlen(cmd_lst->cmd) - i) + 1), data);
-	// 	control_stdout(data, 1);
-	// 	write_file(control_stdout(data, 2), cmd_lst->cmd[i - 1]);
-	// }
+	else if (cmd_lst->cmd[i][0] == '<')
+	{
+		control_stdin(data, 0);
+		exec_cmd_alonex(ft_arrcut(cmd_lst->cmd, i + 1, (ft_arrlen(cmd_lst->cmd) - i) + 1), data);
+		control_stdin(data, 1);
+		write_file(control_stdin(data, 2), cmd_lst->cmd[i - 1]);
+	}
 
 	//ft_printf("\n\nThis was executed second!\n\n");
 	//for (int show = 0; show < ft_arrlen(cmd_lst->cmd); show++)
