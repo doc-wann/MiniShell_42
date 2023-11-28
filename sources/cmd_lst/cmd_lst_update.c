@@ -64,6 +64,7 @@ void	cmd_lst_update_cmd(t_data *data, t_token_lst *token_lst, int index)
 	char		**cmd_lst_new;
 	int			i;
 
+	cmd_quotes(data, token_lst);
 	cmd_lst = cmd_lst_find(data->cmd_lst, index)->cmd;
 	i = 0;
 	while (cmd_lst[i])

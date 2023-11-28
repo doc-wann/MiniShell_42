@@ -16,6 +16,7 @@ void	exit_minishell(t_data *data)
 {
 	int	i;
 
+	ft_printf("test0\n");
 	(void)data;
 	i = 0;
 	while (i < 1000)
@@ -29,5 +30,6 @@ void	exit_minishell(t_data *data)
 		free(data->token_lst->last);
 	}
 	free(data);
+	ft_printf("test\n");
 	exit(0);
 }

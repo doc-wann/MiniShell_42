@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:35:49 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/25 17:52:49 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:12:11 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int	builtin_echo(char **args, t_data *data)
 	args = ft_varfetch(args, data);
 	while(args[i])
 	{
-		ft_printf("%s", args[i], i);
+		ft_putstr_fd(args[i], STDOUT_FILENO);
 		if (i < ft_arrlen(args) - 1)
-			ft_printf(" ");
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (n_flag == 0)
 		ft_printf("\n");
+//	exit (0);
 	return (0);
 }

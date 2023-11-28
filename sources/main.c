@@ -6,7 +6,7 @@
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:37:15 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 23:31:19 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/11/28 21:55:40 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,21 @@ int	check_minishell(t_data *data)
 //////////////////////////////////////////////////////////////
 
 //	CMD expand (environment variables $ & $?)
-//	cmd_expand(data, token_lst);
+//	cmd_expand(data, data->token_lst);
 //	CMD quotes (remove single & double quote (except for $))
-//	cmd_quotes(data, token_lst);
+//	cmd_quotes(data, data->token_lst);
+
+//////////////////////////////////////////////////////////////
+/*	printf("check_quotes  : ");
+	t_token_lst	*token_lst;
+	token_lst = data->token_lst;
+	while (token_lst)
+	{
+		printf("%s ", token_lst->value);
+		token_lst = token_lst->next;
+	}
+	printf("\n");*/
+//////////////////////////////////////////////////////////////
 
 	data->error = cmd_lst(data);
 //	printf("cmd_lst          : ");
@@ -101,6 +113,7 @@ void	loop_minishell(t_data *data)
 			error_msg_check(data);
 		else
 			exec_minishell(data);
+		exit (0);
 		init_read_line(data);
 	}
 }

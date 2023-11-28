@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 //maynotbeneeded :(
 char	*ft_backtrack(char *track)
 {
@@ -27,7 +27,7 @@ char	*ft_backtrack(char *track)
 	else
 		return (track);
 }
-
+*/
 int	ft_lstlen(char **s)
 {
 	int	i;
@@ -54,7 +54,7 @@ char	*get_env(char **envs, char *search)
 	}
 	return (ft_strjoin("$", search));
 }
-
+/*
 char	*path_parser(char *path)
 {
 	while (!ft_isalnum(path[0]))
@@ -92,8 +92,8 @@ int	builtin_cd(char **cmd, t_data *data)
 	}
 	free(buffer);
 	return (0);
-}
-/*
+}*/
+
 int	builtin_cd(char **cmd, t_data *data)
 {
 	(void)data;
@@ -106,4 +106,4 @@ int	builtin_cd(char **cmd, t_data *data)
 	else
 		return (0);	
 }
-*/
+
