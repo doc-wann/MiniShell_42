@@ -153,6 +153,7 @@ int			builtin_unset(char **cmd, t_data *data);
 int			builtin_len(char **cmd);
 void		builtin_exec(t_data *data, char **cmd);
 bool		builtin_check(char **cmd);
+int			ft_indexof(char *str, char *set);
 char		*get_env(char **envs, char *search);
 char		**ft_varfetch(char **args, t_data *data);
 

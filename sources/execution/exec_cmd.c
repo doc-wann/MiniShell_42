@@ -195,6 +195,7 @@ void	exec_cmd_alone(t_data *data)
 
 void	exec_minishell(t_data *data)
 {
+	data->cmd_lst->cmd = ft_varfetch(data->cmd_lst->cmd, data);
 	if (data->nb_exec > 1)
 		exec_cmd_multi(data);
 	else

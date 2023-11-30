@@ -24,15 +24,62 @@ static int	count_args(char **args)
 	return (count);
 }
 
+char	*catch_var(char *string, t_data *data)
+{
+	char *backup;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == '$' && string[i + 1] >= 65 && string[i + 1] <= 90)
+		{
+			j = i + 1;
+			while (string[j] >= 65 && string[j] <= 90)
+				j++;
+			backup = ft_substr(string, j, j - i);
+			string = ft_strjoin(ft_substr(string, 0, i), get_env(data->env, ft_substr(string, i, j)));
+			string = ft_strjoin(string, backup);
+		}
+		else if (string[i] == '$' && string[i + 1] == '?')
+		{
+			backup = ft_substr(string, i + 2, ft_strlen(string) - i - 2);
+			string = ft_strjoin(ft_substr(string, 0, i), ft_itoa(data->exit));
+			string = ft_strjoin(string, backup);
+		}
+		i++;
+	}
+
+	return (string);
+}
+
 char	**ft_varfetch(char **args, t_data *data)
 {
 	int	i;
+	int j;
+	char **list;
 
 	i = 0;
+	j = 0;
 	while (i < count_args(args))
 	{
-		if (ft_strncmp(args[i], "$", 1) == 0)
-			args[i] = get_env(data->env, args[i]);
+		list = ft_split(args[i], ' ');
+		while(list[j])
+		{
+			list[j] = catch_var(list[j], data);
+			j++;
+		}
+		j = 0;
+		while(j < count_args(list) - 1)
+		{
+			list[j] = ft_strjoin(list[j], " ");
+			list[j + 1] = ft_strjoin(list[j], list[j + 1]);
+			j++;
+		}
+		j = 0;
+		args[i] = list[count_args(list) - 1];
 		i++;
 	}
 	return (args);

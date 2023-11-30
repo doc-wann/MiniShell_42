@@ -49,7 +49,7 @@ char	*get_env(char **envs, char *search)
 	{
 		if (ft_strncmp(search, envs[i], ft_strlen(search)) == 0)
 		{
-			return (envs[i] + ft_strlen(search) + 1);
+			return (ft_substr(envs[i], ft_indexof(envs[i], "=") + 1, ft_strlen(envs[i]) - ft_indexof(envs[i], "=")));
 		}
 	}
 	return (ft_strjoin("$", search));
