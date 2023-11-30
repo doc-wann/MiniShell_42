@@ -37,7 +37,7 @@ void	builtin_exec(t_data *data, char **cmd)
 	if (ft_strcmp(cmd[0], "env") == 0)
 		builtin_env(data);
 	if (ft_strcmp(cmd[0], "exit") == 0)
-		builtin_exit(cmd);
+		builtin_exit(cmd, data);
 }
 
 bool	builtin_check(char **cmd)

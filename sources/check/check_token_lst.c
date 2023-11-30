@@ -52,7 +52,7 @@ void	go_to_token_lst(t_data *data, char *value, int index, int token)
 	{
 		word = ft_substr(value, index, check_arg_cmd_size(value, index));
 		if (!word)
-			exit_minishell (data);
+			exit_minishell (data, 0);
 		new_token = token_lst_new(word, token);
 	}
 	else if (data->token_lst_nb == 2)

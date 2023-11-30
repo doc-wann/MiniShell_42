@@ -46,10 +46,10 @@ t_cmd_lst	*cmd_lst_new(t_data *data)
 
 	new = malloc(sizeof(t_cmd_lst));
 	if (!new)
-		exit_minishell(data);
+		exit_minishell(data, 0);
 	new->cmd = malloc(sizeof(char *));
 	if (!new->cmd)
-		exit_minishell(data);
+		exit_minishell(data, 0);
 	new->cmd[0] = NULL;
 	new->index = -1;
 	new->pid = -1;

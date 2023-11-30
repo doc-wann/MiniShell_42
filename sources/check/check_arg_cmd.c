@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 21:47:07 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/20 18:57:19 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/11/28 21:47:37 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ int	check_arg_cmd_size(char *read, int index)
 			index++;
 			size++;
 			while (read[index] != '\"')
+			{
+				index++;
+				size++;
+			}
+		}
+		else if (read[index] == '\'')
+		{
+			index++;
+			size++;
+			while (read[index] != '\'')
 			{
 				index++;
 				size++;

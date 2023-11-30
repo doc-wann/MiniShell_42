@@ -17,7 +17,11 @@ void	error_msg_check(t_data *data)
 	if (data->error == ERROR_UNCLOSED_QUOTES)
 		printf("Minishell> syntax error because expected closing quote\n");
 	if (data->error == ERROR_PIPE)
-		printf("Minishell> syntax error near unexpected token `|'\n");
+	{
+//		printf("Minishell> syntax error near unexpected token `|'\n");
+		ft_putendl_fd("bash: ", STDERR_FILENO);
+		ft_putendl_fd(" syntax error near unexpected token `|'", STDERR_FILENO);
+	}
 	if (data->error == ERROR_REDIR_INPUT)
 		printf("Minishell> syntax error near unexpected token `<'\n");
 	if (data->error == ERROR_REDIR_OUTPUT)
