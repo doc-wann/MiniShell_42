@@ -60,13 +60,13 @@ void	exec_fd_close(t_data *data, int index)
 			if (cmd_lst->fd_in != STDIN_FILENO && cmd_lst->fd_in >= 0)
 			{
 				if (close(cmd_lst->fd_in) < 0)
-					exit_minishell(data);
+					exit_minishell(data, 0);
 				cmd_lst->fd_in = -1;
 			}
 			if (cmd_lst->fd_out != STDOUT_FILENO && cmd_lst->fd_out >= 0)
 			{
 				if (close(cmd_lst->fd_out) < 0)
-					exit_minishell(data);
+					exit_minishell(data, 0);
 				cmd_lst->fd_out = -1;
 			}
 		}

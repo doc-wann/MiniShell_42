@@ -60,6 +60,7 @@ SRCS_EXEC			=	${SRCS_PATH_EXEC}/exec_cmd.c					\
 SRCS_ERROR			=	${SRCS_PATH_ERROR}/error_init.c					\
 						${SRCS_PATH_ERROR}/error_builtin_cd.c			\
 						${SRCS_PATH_ERROR}/error_builtin_pwd.c			\
+						${SRCS_PATH_ERROR}/error_builtin_exit.c			\
 						${SRCS_PATH_ERROR}/error_exec_cmd.c				\
 						${SRCS_PATH_ERROR}/error_pipe.c					\
 						${SRCS_PATH_ERROR}/error_token.c

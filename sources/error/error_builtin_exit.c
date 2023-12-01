@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   error_builtin_exit.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:37:01 by nsutter           #+#    #+#             */
-/*   Updated: 2023/11/29 21:50:18 by nsutter          ###   ########.fr       */
+/*   Created: 2023/09/30 21:36:56 by nsutter           #+#    #+#             */
+/*   Updated: 2023/11/29 22:04:44 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	exit_minishell(t_data *data, int error)
+int	error_builtin_exit_too_many_arg(t_data *data)
 {
 	(void)data;
-/*	int	i;
-
-	i = 0;
-	while (i < 1000)
-	{
-		close(i);
-		i++;
-	}
-	while (data->token_lst->next)
-	{
-		data->token_lst = data->token_lst->next;
-		free(data->token_lst->last);
-	}
-	free(data);*/
-	exit(error);
+	printf("minishell> exit: too many arguments\n");
+	ft_putendl_fd(" too many arguments\n", STDERR_FILENO);
+	return (1);
 }
+
+int	error_builtin_exit_numeric_arg(t_data *data, char *cmd)
+{
+	(void)data;
+	printf("minishell> exit: %s: ", cmd);
+	printf("numeric argument required\n");
+	ft_putendl_fd(" numeric argument required\n", STDERR_FILENO);
+	return (2);
+}
+

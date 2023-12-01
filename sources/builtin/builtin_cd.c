@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:35:39 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/13 18:04:07 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/11/29 22:29:11 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 //maynotbeneeded :(
 char	*ft_backtrack(char *track)
 {
@@ -27,7 +27,7 @@ char	*ft_backtrack(char *track)
 	else
 		return (track);
 }
-
+*/
 int	ft_lstlen(char **s)
 {
 	int	i;
@@ -49,12 +49,12 @@ char	*get_env(char **envs, char *search)
 	{
 		if (ft_strncmp(search, envs[i], ft_strlen(search)) == 0)
 		{
-			return (envs[i] + ft_strlen(search) + 1);
+			return (envs[i] + ft_indexof(envs[i], "=") + 1);
 		}
 	}
 	return (ft_strjoin("$", search));
 }
-
+/*
 char	*path_parser(char *path)
 {
 	while (!ft_isalnum(path[0]))
@@ -92,18 +92,21 @@ int	builtin_cd(char **cmd, t_data *data)
 	}
 	free(buffer);
 	return (0);
-}
-/*
+}*/
+
 int	builtin_cd(char **cmd, t_data *data)
 {
-	(void)data;
+	int	status;
+
+	
+
+	status = 0;
 	if (ft_lstlen(cmd) < 2)
 		return (0);
-	if (ft_lstlen(cmd) > 2)
-		return (error_builtin_cd_too_many_arg());
-	if (chdir(cmd[1]) != 0)
-		return (error_builtin_cd_no_dir(cmd[1]));
-	else
-		return (0);	
+	else if (ft_lstlen(cmd) > 2)
+		status = error_builtin_cd_too_many_arg();
+	else if (chdir(cmd[1]) != 0)
+		status = error_builtin_cd_no_dir(cmd[1]);
+	exit_minishell(data, status);
+	return (0);
 }
-*/

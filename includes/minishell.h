@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:38:08 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/25 18:07:03 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/11/29 21:57:33 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,16 +145,17 @@ void		exec_fd_waitpid(t_data *data);
 /* builtin */
 int			builtin_cd(char **cmd, t_data *data);
 int			builtin_echo(char **args, t_data *data);
-int			builtin_env(t_data *data);							// OK
-int			builtin_exit(char **cmd);
+int			builtin_env(t_data *data);
+int			builtin_exit(char **cmd, t_data *data);
 int			builtin_export(char **cmd, t_data *data);
-int			builtin_pwd(char **cmd);							// OK
+int			builtin_pwd(char **cmd);
 int			builtin_unset(char **cmd, t_data *data);
 int			builtin_len(char **cmd);
 void		builtin_exec(t_data *data, char **cmd);
 bool		builtin_check(char **cmd);
 char		*get_env(char **envs, char *search);
 char		**ft_varfetch(char **args, t_data *data);
+int			ft_indexof(char *str, char *set);
 
 /* signal */
 void		signal_handler(void);
@@ -176,8 +177,10 @@ int			error_builtin_pwd(void);
 int			error_exec_cmd_not_found(char *cmd);
 void		error_msg_check(t_data *data);
 void		error_pipe(t_data *data);
+int			error_builtin_exit_too_many_arg(t_data *data);
+int			error_builtin_exit_numeric_arg(t_data *data, char *cmd);
 
 /* exit */
-void		exit_minishell(t_data *data);
+void		exit_minishell(t_data *data, int error);
 
 #endif

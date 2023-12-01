@@ -27,6 +27,8 @@ int	check_syntax_start(t_token_lst *token_lst)
 {
 	int	error;
 
+	if (token_lst == NULL)
+		return (0);
 	if (token_lst->token == TOKEN_PIPE)
 		return (ERROR_PIPE);
 	if (token_lst->token == TOKEN_SPACE && token_lst->next->token == TOKEN_PIPE)

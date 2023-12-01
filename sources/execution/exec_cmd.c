@@ -132,7 +132,7 @@ void	exec_cmd_simple(t_data *data, t_cmd_lst *cmd_lst)
 	char	*path;
 
 	if (cmd_lst->cmd == NULL)
-		exit_minishell(data);
+		exit_minishell(data, 0);
 	else if (redirection_check(cmd_lst->cmd))
 	{
 		exec_redirection(data, cmd_lst);
@@ -140,7 +140,7 @@ void	exec_cmd_simple(t_data *data, t_cmd_lst *cmd_lst)
 	else if (builtin_check(cmd_lst->cmd))
 	{
 		builtin_exec(data, cmd_lst->cmd);
-		exit_minishell(data);
+		exit_minishell(data, 0);
 	}
 	path = exec_path(cmd_lst->cmd[0], data->env);
 	if (path != NULL)
@@ -195,6 +195,7 @@ void	exec_cmd_alone(t_data *data)
 
 void	exec_minishell(t_data *data)
 {
+	data->cmd_lst->cmd = ft_varfetch(data->cmd_lst->cmd, data);
 	if (data->nb_exec > 1)
 		exec_cmd_multi(data);
 	else

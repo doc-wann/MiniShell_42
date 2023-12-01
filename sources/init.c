@@ -6,7 +6,7 @@
 /*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:48:09 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/15 13:48:20 by nsutter          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:13:36 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	init_data(t_data *data)
 
 void	init_minishell(t_data *data, int argc, char **envp)
 {
-	if (!isatty(0))
-	{
-		error_init(data, ERROR_ISATTY);
-		exit(EXIT_SUCCESS);
-	}
+	// if (!isatty(0))
+	// {
+	// 	error_init(data, ERROR_ISATTY);
+	// 	exit(EXIT_SUCCESS);
+	// }
 	if (argc != 1)
 	{
 		error_init(data, ERROR_NB_ARGUMENT);

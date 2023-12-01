@@ -15,5 +15,5 @@
 void	error_pipe(t_data *data)
 {
 	perror(NULL);
-	exit_minishell(data);
+	exit_minishell(data, 0);
 }

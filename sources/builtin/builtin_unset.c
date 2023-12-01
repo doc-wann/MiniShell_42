@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:36:13 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/19 17:26:32 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/11/29 22:15:41 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	builtin_unset(char **cmd, t_data *data)
 		}
 		i++;
 	}
-	ft_printf("Error - No matches were found sadpeepo\n");
+//	ft_printf("Error - No matches were found sadpeepo\n");
 	return (1);
 }

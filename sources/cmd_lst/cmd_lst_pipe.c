@@ -24,7 +24,7 @@ void	cmd_lst_pipe_create(t_data *data)
 	{
 		fd_pipe = malloc(sizeof(int) * 2);
 		if (!fd_pipe)
-			exit_minishell(data);
+			exit_minishell(data, 0);
 		if (pipe(fd_pipe) < 0)
 			error_pipe(data);
 		cmd_lst_find(data->cmd_lst, index)->fd_out = fd_pipe[1];

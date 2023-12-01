@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdaniele <hdaniele@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nsutter <nsutter@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:36:02 by nsutter           #+#    #+#             */
-/*   Updated: 2023/10/19 17:26:18 by hdaniele         ###   ########.fr       */
+/*   Updated: 2023/11/29 22:22:44 by nsutter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,33 @@ int	builtin_export(char **cmd, t_data *data)
 {
 	cmd += 1;
 
+	if (!ft_isalpha(cmd[0][0]) || ft_indexof(cmd[0], "=") == (int)ft_strlen(cmd[0]) - 1)
+	{
+		ft_putstr_fd(" not a valid identifier", STDERR_FILENO);
+		exit_minishell(data, 1);
+		return (0);
+	}
 	if (cmd[0] == NULL || ft_indexof(cmd[0], "=") == -1)
-		ft_printf("Error - Bad Assignment\n");
+	{
+		if (cmd[0][ft_strlen(cmd[0]) - 1] == '-')
+		{
+			ft_putstr_fd(" not a valid identifier", STDERR_FILENO);
+			exit_minishell(data, 1);
+		}
+		exit_minishell(data, 0);
+		return (0);
+	}
 	else if (ft_indexof(cmd[0], "=") == (int)ft_strlen(cmd[0]) - 1)
-		ft_printf("Error - Bad Assignment\n");
+	{
+		exit_minishell(data, 1);
+		return (0);
+	}
+	else if (ft_indexof(cmd[0], "=") == ft_indexof(cmd[0], "-") + 1)
+	{
+		ft_putstr_fd(" not a valid identifier", STDERR_FILENO);
+		exit_minishell(data, 1);
+		return (0);
+	}
 	else
 		add_to_env(data, ft_split(cmd[0], '=')[0], ft_split(cmd[0], '=')[1]);
 	return (0);
